@@ -1,0 +1,484 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Shadows+Into+Light&display=swap');
+
+
+body{
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f7f7f7;
+}
+
+header{
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
+    background-color: black;
+}
+
+.banner{
+    background-image: url(/img/banner.png);
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* .banner img{
+    height: 500px;
+    width: 100%;
+} */
+
+.nav-top{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 115px;
+    width: 1140px;
+}
+
+.wsp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.search button{
+    height: 40px;
+    width: 40px;
+    background-color: white;
+    padding: 0;
+    border: none;
+}
+
+.search input{
+    width: 560px;
+    height: 40px;
+    background-color: white;
+    padding: 0px 20px;
+    border: none;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.search{
+    background-color: white;
+}
+
+.logo{
+    height: 60px;
+    width: 60px;
+}
+
+.menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+    width: 1140px;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: sticky;
+    top: 171px;
+}
+
+.menu span, .menu-st span{
+    color: white;
+}
+
+.top-mn ul{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    list-style: none;
+    height: 56px;
+}
+
+.top-mn ul li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    /* width: 110px; */
+    font-size: 1rem;
+    margin: 0px 3px;
+}
+
+.top-mn ul li a{
+    background-color: #222222;
+    border-radius: 2px;
+    text-decoration: none;
+    color: white;
+    /* width: 110px; */
+    padding: 0px 15px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.top-mn ul li a:hover{
+    background-color: white;
+    color: black;
+}
+
+.contenido{
+    /* height: 200vh; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 60px 0px;
+}
+
+/* .listProduct{
+    width: 1140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 60px;
+} */
+
+.listProduct{
+    width: 1140px;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto;
+    column-gap: 60px;
+    row-gap: 60px;
+}
+
+.menu button, .menu-st button{
+    height: 42px;
+    width: 255px;
+    border-radius: 0px;
+    border: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 5px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.menu button p, .menu-st button p{
+    margin: 0;
+    display: flex;
+    justify-content: start;
+    width: 70%;
+}
+
+.menu button i, .menu-st button i{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+}
+
+.top-mn{
+    display: flex;
+    align-items: center;
+}
+
+/* position fixed y z index para hacer que aparezca un nuevo nav al hacer scroll. solo con html y css.*/
+.menu-st{
+    position: fixed;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: black;
+    padding: 0px 105px;
+    box-sizing: border-box;
+    top: 0px;
+}
+
+.menu-st a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-st{
+    margin-right: 10px;
+    height: 40px;
+    width: 40px;
+}
+
+.top-mn-st{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.wsp a i{
+    color: green;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.wsp a{
+    text-decoration: none;
+}
+
+.btm-mn i{
+    cursor: pointer;
+    margin: 5px;
+}
+
+footer{
+    padding: 0;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cards{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1140px;
+    padding: 60px 0px;
+}
+
+.cards div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    width: 360px;
+    height: 175px;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+    /* margin: 0px 10px; */
+}
+
+.cards div h4, .cards div p{
+    margin: 5px 0 0 0;
+}
+
+.info{
+    display: grid;
+    grid-template-columns: 35% 20% 20% 25%;
+    grid-template-rows: auto;
+    /* padding: 50px 0px; */
+    width: 1140px;
+}
+
+.info-sec{
+    display: flex;
+    flex-direction: column;
+}
+
+.sec-p{
+    padding: 0px 10px;
+}
+
+.info h4{
+    margin: 0px;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.logo-foo{
+    height: 70px;
+    width: 70px;
+}
+
+.info p{
+    margin: 0px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.info i{
+    margin-right: 5px;
+}
+
+.info a{
+    text-decoration: none;
+    margin-top: 5px;
+    color:#3b3b3b ;
+    font-size: 0.9rem;
+}
+
+.info-trd{
+    display: flex;
+    flex-direction: column;
+}
+
+.info-icon i{
+    margin-right: 10px;
+    border-radius: 50px;
+    padding: 10px;
+    color: white;
+}
+
+.instagram{
+    /* background-color: #5F4BC6; */
+    background-image: linear-gradient(to right top, #f86f2f, #fc5249, #f83663, #ea207e, #d22099, #c029a6, #aa33b3, #903dbd, #8541c0, #7945c2, #6d48c4, #5f4bc6);
+}
+
+.facebook{
+    background-color: #1151a5;
+}
+
+.twitter{
+    background-color: #1DA1F2;
+}
+
+.youtube{
+    background-color: #d30000;
+}
+
+.info-sec ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.info-sec ul li{
+    margin-bottom: 8px;
+}
+
+.info-sec ul li a{
+    text-decoration: none;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.img-p{
+    padding: 20px 0px;
+}
+
+hr{
+    margin: 0;
+}
+
+.hr{
+    width: 1140px;
+}
+
+.develop{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 1140px;
+    height: 105px;
+    border-top: 1px solid #dddddd;
+}
+
+.develop a{
+    text-decoration: none;
+    color: black;
+    font-size: 0.9rem;
+}
+
+.develop a:hover{
+    text-decoration: underline;
+}
+
+.productDiv{
+    width: 195px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 15px;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 12px rgb(3, 3, 3, 0.15);
+    background-color: white;
+    overflow: hidden;
+    transition: all 0.5s;
+    position: relative;
+}
+
+/* .productDiv:hover{
+    transform: scale(1.09);
+} */
+
+.productDiv h2{
+    font-size: 0.9rem;
+    font-weight: 600;
+    height: 70px;
+}
+
+.productDiv span{
+    font-size: 0.75rem;
+    color: #28a745;
+    font-weight: 600;
+}
+
+.productInfo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    z-index: 1;
+}
+
+.productDiv h3{
+    font-size: 0.95rem;
+    margin: 0;
+    font-weight: 400;
+}
+
+.productImg{
+    height: 195px;
+    width: auto;
+    object-fit: contain;
+}
+
+.productDiv button{
+    /* position: absolute; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 0px;
+    width: 80px;
+    border: none;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+}
+
+.productDiv:hover{
+    transform: scale(1.1);
+}
+
+.menu-st{
+    display: none;
+}
+
+.contenedorCarrito{
+    width: 1140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenedorCarrito h3{
+    margin: 0;
+}
+
+.misProductos{
+    height: 200px;
+}
