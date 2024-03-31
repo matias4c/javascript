@@ -145,7 +145,7 @@ header{
     gap: 60px;
 } */
 
-.listProduct{
+.contenedorProductos{
     width: 1140px;
     display: grid;
     justify-content: center;
