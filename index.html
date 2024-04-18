@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="img/icon.png" type="image/xml-svg">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <title>Tecno</title>
         <link rel="stylesheet" href="css/style.css">
         <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
@@ -25,7 +26,7 @@
             </div>
             <nav class="menu">
                 <div class="top-mn">
-                    <button>
+                    <button class="btn-producto-desplegable">
                         <i class='bx bx-menu-alt-left bx-sm'></i>
                         <p>Productos</p>
                         <i class='bx bx-chevron-down bx-xs'></i>
@@ -39,8 +40,8 @@
                     </ul>
                 </div>
                 <div class="btm-mn">
-                    <span><i class='bx bx-cart bx-sm'></i></span>
-                    <span><i class='bx bx-user bx-sm' ></i></span>
+                    <span onclick="abrirCarrito()"><i class='bx bx-cart bx-sm'></i></span>
+                    <span><i class='bx bx-user bx-sm'></i></span>
                 </div>
             </nav>
         </header>
@@ -49,39 +50,77 @@
         
         </section>
 
-        <nav class="menu-st">
-            <div class="top-mn-st">
-                <a href="#"><img src="img/icon.png" class="logo-st" alt="logo"></a>
-                <div class="top-mn">
-                    <button>
-                        <i class='bx bx-menu-alt-left bx-sm'></i>
-                        <p>Productos</p>
-                        <i class='bx bx-chevron-down bx-xs'></i>
-                    </button>
-                    <ul>
-                        <li><a href="#">Marcas<i class='bx bx-chevron-down'></i></a></li>
-                        <li><a href="#">Ofertas</a></li>
-                        <li><a href="#">Contacto</a></li>
-                        <li><a href="#">Mis pedidos</a></li>
-                        <li><a href="#">Arma tu Pc</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="btm-mn">
-            <span><i class='bx bx-cart bx-sm'></i></span>
-            <span><i class='bx bx-user bx-sm'></i></span>
-            </div>
-        </nav>
-
         <div class="contenido">
+            <div class="contenedorFiltros">
+                <h4>Categorias</h4>
+                <ul class="listaFiltros">
+                    <li><button class="boton-filtro boton-filtro-estilo" id="todos">Todos los productos</button></li>
+                    <li><button class="boton-filtro boton-filtro-estilo" id="mouse">Mouse</button></li>
+                    <li><button class="boton-filtro boton-filtro-estilo" id="teclado">Teclado</button></li>
+                    <li><button class="boton-filtro boton-filtro-estilo" id="auriculares">Auriculares</button></li>
+                    <li><button class="boton-filtro boton-filtro-estilo" id="mousepad">Mouse Pad</button></li>
+                </ul>
+                <ul class="listaFiltros">
+                    <p>Marca</p>
+                    <li><button class="filtro-marca boton-filtro-estilo" id="redragon">Redragon</button></li>
+                    <li><button class="filtro-marca boton-filtro-estilo" id="t-dagger">T-dagger</button></li>
+                </ul>
+            </div>
             <div id="contenedorProductos" class="contenedorProductos">
                 
             </div>
         </div>
 
+        <section id="contenedorCarrito">
+            <div class="fondoCarrito">
+                <div class="carrito">
+                    <div class="carrito_title">
+                        <h4>Mi carrito</h4>
+                        <i onclick="cerrarCarrito()" class='bx bx-x'></i>
+                    </div>
+                    <div class="contenidoCarrito">
+                        <div id="carritoVacio">
+                           <img src="img/empty-cart.png" alt="empty-cart">
+                           <p>Tu carrito está vacío!</p>
+                        </div>
+                        <div id="carritoConProductos" class="disabled">
+                            
+                        </div>
+                        <div id="carrito-boton-total" class="botonPrecioTotal disabled">
+                            <div class="carritoTotal">
+                                <p class="text-total">Total: &nbsp</p>
+                                <p id="total">$0</p>
+                            </div>
+                            <div class="contenedorCarritoBotones">
+                                <button class="carritoBotonVaciar">Vaciar todo</button>
+                                <button class="carritoBotonComprar">Finalizar compra</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="cartel-producto-agregado" style="display: none;">
+            
+        </div>
+
+        <button class="carrito-flotante" style="display: none;">
+            <i class="bx bx-cart"></i>
+            <p class="numero-cantidad"></p>
+        </button>
+
+        <div class="cartel-vaciar-carrito" style="display: none;">
+            <p>¿Estás seguro que deseas vaciar todo el carrito?</p>
+            <div class="botones-cartel">
+                <button class="cancelarBoton">Cancelar</button>
+                <button class="confirmarBoton">Confirmar</button>
+            </div>
+        </div>
+
         <footer>
             <section class="cards">
-                <div data-aos="fade-right">
+                <div>
                     <i class='bx bx-package bx-lg'></i>
                     <h4>Realizamos envios</h4>
                     <p>Conoce nuestros medios de envios disponibles</p>
@@ -91,7 +130,7 @@
                     <h4>Paga tus compras aqui</h4>
                     <p>Conoce todos los medios de pagos disponibles</p>
                 </div>
-                <div data-aos="fade-left">
+                <div>
                     <i class='bx bx-support bx-lg'></i>
                     <h4>Soporte</h4>
                     <p>Comunicate con nosotros</p>
@@ -157,10 +196,12 @@
             </div>
         </footer>
 
+        <script src="js/productos.js"></script>
         <script src="js/main.js"></script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
             AOS.init();
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>
