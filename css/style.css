@@ -3,7 +3,7 @@
 body{
     margin: 0;
     font-family: 'Open Sans', sans-serif;
-    background-color: #f7f7f7;
+    background-color: rgb(245, 245, 245);
 }
 
 header{
@@ -257,6 +257,8 @@ footer{
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+
 }
 
 .cards{
@@ -291,6 +293,7 @@ footer{
     grid-template-rows: auto;
     /* padding: 50px 0px; */
     width: 1140px;
+    margin-top: 20px;
 }
 
 .info-sec{
@@ -420,6 +423,7 @@ hr{
     overflow: hidden;
     transition: all 0.5s;
     position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 /* .productDiv:hover{
@@ -547,7 +551,7 @@ hr{
     padding: 5px 10px;
     height: calc(100vh - 50px);
     box-sizing: border-box;
-    border-radius: 20px;
+    /* border-radius: 20px; */
     overflow: hidden;
 }
 
@@ -561,7 +565,7 @@ hr{
     box-sizing: border-box;
     background-color: #222;
     color: white;
-    border-radius: 20px;
+    /* border-radius: 20px; */
 }
 
 .carrito_title i{
@@ -609,18 +613,19 @@ hr{
     background-color: crimson;
     color: white;
     border: solid 1px  rgb(3, 3, 3, 0.2);
-    padding: 3px 10px;
+    padding: 6px 10px;
     font-size: 0.8rem;
-    border-radius: 20px;
+    /* border-radius: 20px; */
 }
 
 .carritoBotonComprar{
+    text-decoration: none;
     border: none;
     background-color: #f7f7f7;
     color: black;
-    padding: 4px 15px;
+    padding: 8px 15px;
     font-size: 0.9rem;
-    border-radius: 20px;
+    /* border-radius: 20px; */
 }
 
 .botonPrecioTotal{
@@ -632,7 +637,7 @@ hr{
     width: 100%;
     background-color: #222;
     color: white;
-    border-radius: 20px;
+    /* border-radius: 20px; */
 }
 
 .text-total{
@@ -724,40 +729,6 @@ hr{
     margin: 0;
 }
 
-.cartel-vaciar-carrito{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    z-index: 300;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #222;
-    color: white;
-    height: 100px;
-    width: 400px;
-    border-radius: 20px;
-}
-
-.cancelarBoton{
-    border: none;
-    background-color: #f7f7f7;
-    color: black;
-    padding: 4px 15px;
-    font-size: 0.9rem;
-    border-radius: 20px;
-}
-
-.confirmarBoton{
-    border: none;
-    background-color: crimson;
-    color: white;
-    padding: 4px 15px;
-    font-size: 0.9rem;
-    border-radius: 20px;
-}
 
 .botones-cartel{
     display: flex;
@@ -810,4 +781,140 @@ hr{
 .active{
     background-color: rgba(0, 0, 0, 0.85);
     color: white;
+}
+
+.swal2-popup{
+    background-color: white;
+    color: black;
+    border-radius: 0px;
+}
+
+.swal2-popup h2{
+    font-size: 1.5rem;
+}
+
+.swal2-popup .swal2-confirm{
+    background-color: crimson;
+}
+
+.swal2-popup .swal2-styled{
+    border-radius: 0px;
+}
+
+
+.contenedorDatos{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: calc(100vh - 115px);
+    padding: 20px 100px 10px 0px;
+}
+
+.formulario-datos, .formulario-pago, .formulario-confirmacion{
+    width: 1000px;
+    background-color: white;
+    box-shadow: 0px 4px 12px rgb(3, 3, 3, 0.15);
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    padding-top: 5px;
+    padding-bottom: 15px;
+}
+
+.row{
+    margin: 10px 0px;
+}
+
+.btn{
+    margin-left: 5px;
+    border-radius: 0px;
+}
+
+.btn h6{
+    margin: 0;
+    padding: 5px;
+}
+
+.form-control{
+    border-radius: 0px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.principal-titulo{
+    background-color: black;
+    margin: 0;
+    font-size: 1.7rem;
+    padding: 10px;
+    padding-left: 30px;
+    color: white;
+}
+
+.principal-titulo i{
+    color: greenyellow;
+}
+
+.col-md{
+    padding: 0px 5px;
+}
+
+.principal-datos{
+    margin: 20px 0px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+.detallesLateralPago{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 120px;
+    height: 400px;
+    padding: 10px;
+    background-color: rgb(0, 0, 0);
+
+}
+
+.lateralNumero{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.2;
+}
+
+.lateralNumero p{
+    margin: 0;
+    color: white;
+}
+
+.lateralNumero span{
+    background-color: white;
+    color: black;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border-radius: 10px;
+}
+
+.active{
+    opacity: 1;
+}
+
+.formulario-confirmacion{
+    padding: 20px;
+}
+
+.progress{
+    width: 1140px;
+    margin: auto;
+    margin-bottom: 10px;
 }

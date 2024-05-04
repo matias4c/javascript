@@ -1,4 +1,15 @@
-//TERCER PRE-ENTREGA
+//ENTREGA FINAL
+let productos = [];
+let productoFiltrado = [];
+
+fetch('../js/productos.json')
+    .then(res => res.json())
+    .then(data => {
+        productos = data;
+        productoFiltrado = productos;
+        cargarProductos(productos)
+    })
+
 //Función que me permite cargar en html los productos que aparecen en el arreglo.
 const contenedorProductos = document.querySelector("#contenedorProductos");
 
@@ -35,7 +46,6 @@ function abrirCarrito(){
 //Funcion para ocultar carrito
 function cerrarCarrito(){
     document.getElementById('contenedorCarrito').style.display = 'none';
-    cartelVaciarCarrito.style.display = 'none';
 }
 
 //Evento al presionar la tecla ESC (se cierra el carrito)
@@ -59,6 +69,35 @@ function actualizarBotones(){
 }
 actualizarBotones();
 
+function cartelAgregadoCarrito(){
+    Toastify({
+        text: "Producto agregado a tu carrito",
+        duration: 1000,
+        newWindow: false,
+        close: false,
+        gravity: "top", 
+        position: "right",
+        stopOnFocus: false,
+        style: {
+          background: "linear-gradient(to right, #00b09b, #86b437)",
+        }
+    }).showToast();
+}
+
+function cartelQuitadoCarrito(){
+    Toastify({
+        text: "Producto eliminado de tu carrito",
+        duration: 1000,
+        newWindow: false,
+        close: false,
+        gravity: "top", 
+        position: "right",
+        stopOnFocus: false,
+        style: {
+          background: "linear-gradient(to right, #dc143c, #dd2748, #de3654)",
+        }
+    }).showToast();
+}
 
 //Funcion que agrega los productos al array productosCarrito, y despues lo muestra en html con otra funcion
 let productosCarrito;
@@ -89,60 +128,9 @@ function agregarCarrito(e){
   }
   
   actualizarNumeroCarrito();
-  mostrarCartelVerde();
   mostrarEnCarrito();
   actualizarLocalStorage();
-}
-
-//Funcion que muestra un cartel al agregar un producto dentro del carrito
-const cartel = document.querySelector('.cartel-producto-agregado');
-function mostrarCartelVerde(){
-    cartel.innerText = 'Se agregó el producto al carrito';
-    cartel.style.display = 'flex';
-    cartel.style.backgroundColor = '#1d8836';
-    //la funcion dentro del setTimeout se ejecuta despues de esperar 1000 milisegundos (1 segundo)
-    setTimeout(function() {
-        //se oculta con display none
-        cartel.style.display = 'none';
-        //reinicio el contenido del div
-        cartel.innerText = '';
-        //reinicio el backgoundColor del div
-        cartel.style.backgroundColor = '';
-    }, 1000);
-}
-
-//Funcion que muestra un cartel al eliminar un producto del carrito
-function mostrarCartelRojo(){
-    cartel.innerText = 'Se vació el carrito';
-    cartel.style.display = 'flex';
-    cartel.style.backgroundColor = '#dc143c';
-
-    //la funcion dentro del setTimeout se ejecuta despues de esperar 1000 milisegundos (1 segundo)
-    setTimeout(function() {
-        //se oculta con display none
-        cartel.style.display = 'none';
-        //reinicio el contenido del div
-        cartel.innerText = '';
-        //reinicio el backgoundColor del div
-        cartel.style.backgroundColor = '';
-    }, 1000);
-}
-
-//Funcion que muestra un cartel cuando vacío el carrito
-function mostrarCartelRojoVacio(){
-    cartel.innerText = 'Producto eliminado de tu carrito';
-    cartel.style.display = 'flex';
-    cartel.style.backgroundColor = '#dc143c';
-
-    //la funcion dentro del setTimeout se ejecuta despues de esperar 1000 milisegundos (1 segundo)
-    setTimeout(function() {
-        //se oculta con display none
-        cartel.style.display = 'none';
-        //reinicio el contenido del div
-        cartel.innerText = '';
-        //reinicio el backgoundColor del div
-        cartel.style.backgroundColor = '';
-    }, 1000);
+  cartelAgregadoCarrito();
 }
 
 
@@ -221,30 +209,40 @@ function totalFinal(){
     carritoPrecioTotal.classList.add('disabled');
     }
 }
+//Evento al hacer click sobre boton de "Finalizar compra"
+const botonComprar = document.querySelector('.carritoBotonComprar');
+
+botonComprar.addEventListener('click', () => {
+    cerrarCarrito();
+})
 
 //Evento al hacer click sobre boton de "Vaciar carrito"
 //al presionar el botonVaciar
 const botonVaciar = document.querySelector('.carritoBotonVaciar');
-//aparece este cartel preguntando si esta seguro de vaciar todo el carrito
-const cartelVaciarCarrito = document.querySelector('.cartel-vaciar-carrito');
-//este es el boton para cancelar
-const botonCancelar = document.querySelector('.cancelarBoton');
-//este es el boton para confirmar
-const botonConfirmar = document.querySelector('.confirmarBoton');
 
-
-//al hacer click sobre botonVaciar se muestra el cartel que pregunta si esta seguro y muestra los dos botones de cancelar y confirmar
 botonVaciar.addEventListener('click', () => {
-  cartelVaciarCarrito.style.display = 'flex';
+    Swal.fire({
+        title: '¿Estás seguro de vaciar todo el carrito?',
+        icon: 'warning',
+        iconColor: 'red',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, seguro',
+        cancelButtonText: 'No, no quiero'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+            title: 'Productos removidos!',
+            icon: 'success',
+            text: 'Tu carrito está vacío.',
+            showConfirmButton: false,
+            timer: 2500
+            })
+            cerrarCarrito();
+            vaciarCarritoEntero();
+        }
+        })
 })
 
-//al hacer click sobre cancelar simplemente oculto el cartel que pregunta si esta seguro
-botonCancelar.addEventListener('click', () => {
-  cartelVaciarCarrito.style.display = 'none';
-})
-
-//al hacer click sobre el boton de confirmar llamo a funcion vaciarCarritoEntero()
-botonConfirmar.addEventListener("click", vaciarCarritoEntero);
 
 
 //Funcion que vacia el carrito
@@ -254,8 +252,6 @@ function vaciarCarritoEntero(){
     carritoVacio.classList.remove('disabled');
     carritoConProductos.classList.add('disabled');
     carritoPrecioTotal.classList.add('disabled');
-    cartelVaciarCarrito.style.display = 'none';
-    mostrarCartelRojo();
     actualizarNumeroCarrito();
     actualizarLocalStorage();
     //elimino del localStorage el arreglo de productos del carrito
@@ -281,7 +277,7 @@ function eliminarProducto(e){
             productosCarrito.splice(productoIndex, 1);
         }
     }
-    mostrarCartelRojoVacio();
+    cartelQuitadoCarrito();
     mostrarEnCarrito();
     actualizarNumeroCarrito();
     actualizarLocalStorage();
@@ -336,7 +332,7 @@ if(carritoEnLS){
 //Filtros segun categoria (mostrar todos los productos, mostrar solo mouse, mostrar solo teclado....)
 const botonesFiltros = document.querySelectorAll('.boton-filtro');
 //asgino la variable productoFiltrado y lo inicializo con el valor productos (array que contiene todos los productos)
-let productoFiltrado = productos;
+// let productoFiltrado = productos;
 //inicializo el id 'todos' con la clase 'active' agregada, para que sea el boton por defecto
 document.querySelector('#todos').classList.add('active');
 
@@ -355,7 +351,7 @@ botonesFiltros.forEach(boton => {
         //si el boton de la categoria que seleccione es distinta de "todos los productos" entonces...
         if(botonFiltro != 'todos'){
             //guardo en una constante un nuevo array de productos que cumplan con la condicion
-            productoFiltrado = productos.filter(producto => producto.tipo === botonFiltro);
+            productoFiltrado = productos.filter(producto => producto.categoria === botonFiltro);
             //cargamos los productos en html, pero solo aquellos que filtramos
             cargarProductos(productoFiltrado);
         } else { //si el boton que seleccioné fue el de "todos los productos" entonces...
@@ -374,18 +370,16 @@ const botonesMarcas = document.querySelectorAll('.filtro-marca');
 botonesMarcas.forEach(boton => {
   //le damos evento al hacer click
   boton.addEventListener('click', (e) =>{
-      //al hacer click sobre uno, los demas pierden la clase 'active' (pierden el estilo del boton)
-      botonesMarcas.forEach(boton => boton.classList.remove('active'));
-      //al boton que presiono le agrego la clase 'active' (le da estilo al boton)
-      e.currentTarget.classList.add('active');
+        //al hacer click sobre uno, los demas pierden la clase 'active' (pierden el estilo del boton)
+        botonesMarcas.forEach(boton => boton.classList.remove('active'));
+        //al boton que presiono le agrego la clase 'active' (le da estilo al boton)
+        e.currentTarget.classList.add('active');
 
-    //si productoFiltrado tiene objetos (no es vacio) entonces...
-    if(productoFiltrado){
-      //llamo al arreglo de productos filtrados y sobre esos le aplico el nuevo filtro por marca
-      //guardo en una constante el nuevo array de productos filtrados segun la condicion (que la marca sea igual al nombre del boton)
-      const productoMarcaFiltrado = productoFiltrado.filter(producto => producto.marca === e.currentTarget.id);
-      //cargamos los productos que filtramos por marca y los mostramos en pantalla
-      cargarProductos(productoMarcaFiltrado);
-    } 
-  })
+        //si productoFiltrado tiene objetos (no es vacio) entonces...
+        if(productoFiltrado){
+            const productoMarcaFiltrado = productoFiltrado.filter(producto => producto.marca === e.currentTarget.id);
+            //cargamos los productos que filtramos por marca y los mostramos en pantalla
+            cargarProductos(productoMarcaFiltrado);
+        }
+    })
 })
