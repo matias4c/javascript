@@ -18,7 +18,7 @@ header{
 }
 
 .banner{
-    background-image: url(/img/banner.jpg);
+    background-image: url(../img/banner.jpg);
     height: 500px;
     background-size: cover;
     background-position: center;
