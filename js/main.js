@@ -214,6 +214,7 @@ const botonComprar = document.querySelector('.carritoBotonComprar');
 
 botonComprar.addEventListener('click', () => {
     cerrarCarrito();
+    vaciarCarritoEntero();
 })
 
 //Evento al hacer click sobre boton de "Vaciar carrito"
