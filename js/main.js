@@ -2,7 +2,7 @@
 let productos = [];
 let productoFiltrado = [];
 
-fetch('../js/productos.json')
+fetch('js/productos.json')
     .then(res => res.json())
     .then(data => {
         productos = data;
