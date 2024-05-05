@@ -2,6 +2,7 @@
 let productos = [];
 let productoFiltrado = [];
 
+//cargamos el arreglo de productos
 fetch('js/productos.json')
     .then(res => res.json())
     .then(data => {
@@ -336,7 +337,8 @@ const botonesFiltros = document.querySelectorAll('.boton-filtro');
 // let productoFiltrado = productos;
 //inicializo el id 'todos' con la clase 'active' agregada, para que sea el boton por defecto
 document.querySelector('#todos').classList.add('active');
-
+const tituloSeccionProductos = document.querySelector('.tituloSeccionProductos');
+let globalContentTitulo = document.querySelector('#todos').textContent;
 //por cada boton hace lo siguiente...
 botonesFiltros.forEach(boton => {
     //evento al hacer click...
@@ -348,14 +350,17 @@ botonesFiltros.forEach(boton => {
         botonesMarcas.forEach(boton => boton.classList.remove('active'));
         //al boton que presiono le agrego la clase 'active' (le da estilo al boton)
         e.currentTarget.classList.add('active');
-
+        const contentTitulo = document.querySelector(`#${botonFiltro}`).textContent;
+        globalContentTitulo = contentTitulo;
         //si el boton de la categoria que seleccione es distinta de "todos los productos" entonces...
         if(botonFiltro != 'todos'){
             //guardo en una constante un nuevo array de productos que cumplan con la condicion
             productoFiltrado = productos.filter(producto => producto.categoria === botonFiltro);
+            tituloSeccionProductos.innerHTML = `${contentTitulo}`
             //cargamos los productos en html, pero solo aquellos que filtramos
             cargarProductos(productoFiltrado);
         } else { //si el boton que seleccioné fue el de "todos los productos" entonces...
+            tituloSeccionProductos.innerHTML = `${contentTitulo}`
             //los productos filtrados lo "reiniciamos" a un arreglo con todos los productos que tenemos
             productoFiltrado = productos;
             //cargamos todos los productos y los mostramos
@@ -365,19 +370,24 @@ botonesFiltros.forEach(boton => {
 });
 
 //Filtro por marca
-//(aclaracion: el filtro por marca funciona sobre el filtro de categorias, ejemplo: selecciono categoria: mouse y luego filtro segun la marca: redragon)
+//(aclaracion: el filtro por marca funciona sobre el filtro de categorias, ejemplo: selecciono categoria: mouse, y luego filtro segun la marca: redragon)
 const botonesMarcas = document.querySelectorAll('.filtro-marca');
 
 botonesMarcas.forEach(boton => {
   //le damos evento al hacer click
   boton.addEventListener('click', (e) =>{
+        const botonesMarcasID = e.currentTarget.id;
         //al hacer click sobre uno, los demas pierden la clase 'active' (pierden el estilo del boton)
         botonesMarcas.forEach(boton => boton.classList.remove('active'));
         //al boton que presiono le agrego la clase 'active' (le da estilo al boton)
         e.currentTarget.classList.add('active');
+        
 
         //si productoFiltrado tiene objetos (no es vacio) entonces...
         if(productoFiltrado){
+            const contentTituloMarca = document.querySelector(`#${botonesMarcasID}`).textContent;
+            tituloSeccionProductos.innerHTML = `${globalContentTitulo} <i class='bx bx-chevrons-right'></i> ${contentTituloMarca}`;
+
             const productoMarcaFiltrado = productoFiltrado.filter(producto => producto.marca === e.currentTarget.id);
             //cargamos los productos que filtramos por marca y los mostramos en pantalla
             cargarProductos(productoMarcaFiltrado);

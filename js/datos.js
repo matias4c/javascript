@@ -5,8 +5,11 @@ const barraProgreso = document.querySelector('.progress-bar');
 
 const botonDatos = document.querySelector('#boton-datos');
 
+//evento al hacer click sobre el boton de confirmar datos (en formulario)
 botonDatos.addEventListener('click', () => {
+        //checkValidity es para que se ejecute cuando el formulario este completo (sin campos olbigatorios vacios)
     if(formularioDatos.checkValidity()){
+        //preventDefault para que no se recargue la pagina al hacer submit (enviar formulario)
         formularioDatos.addEventListener('submit', (e) => {e.preventDefault()})
         document.querySelector('.lateralNumero').classList.remove('active');
         document.querySelector('#numero2').classList.add('active');
@@ -53,8 +56,12 @@ botonDatos.addEventListener('click', () => {
 
         const formularioPago = document.querySelector('#form-pago');
         const botonPago = document.querySelector('#boton-pago');
+        
+        //evento al hacer click sobre el boton de confirmar medio de pago (en formulario)
         botonPago.addEventListener('click', () => {
+            //checkValidity es para que se ejecute cuando el formulario este completo (sin campos olbigatorios vacios)
             if(formularioPago.checkValidity()){
+                //preventDefault para que no se recargue la pagina al hacer submit (enviar formulario)
                 formularioPago.addEventListener('submit', (e) => {e.preventDefault()})
                 
                 setTimeout(()=> {
